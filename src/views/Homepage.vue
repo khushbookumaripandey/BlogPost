@@ -3,14 +3,13 @@
     <Navbar/>
    <div class="container">
 <div class="bgImg" ></div>
-   <div class="test">Welcome to our blogging <br>site on a <br>xyz foundation.</div>
+   <div class="test">Welcome to our blogging <br>site on a xyz foundation.</div>
    <div class="text">Fast,reliable and packed with features,<br>our blogging platform gives<br>options that are designed to fit your needs.<br><br>
    <button class="btn" @click="form">Post</button>
    </div>
 </div>
 </div>
 </template>
-
 <script>
 import Navbar from '../components/Navbar.vue'
 export default {
@@ -44,31 +43,31 @@ export default {
   width: 100%;
 }
 .bgImg{
-    position: absolute;
+  position: absolute;
   height: 100%;
   width: 100%;
   background-color: rgb(230, 250, 255);;
 }
 .test{
     position: relative;
-    font-size: 7vh;
+    font-size: 4em;
     color:#000000;
-    margin: 10vh;
+    margin: 8vh;
 }
 .text{
     position: relative;
-     font-size: 4vh;
+     font-size: 3em;
      color:#aaa;
-     margin: 10vh;
+     margin: 8vh;
 }
 .btn{
 cursor: pointer;
 border: 2px solid #aaa;
 background-color: transparent;
-height: 10vh;
-width: 20vw;
+padding: 0.5vw;
+width: 15vw;
 color:#000000;
-font-size: 5vh;
+font-size: 3vw;
 box-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);
 margin: 5vh;
 }
@@ -76,10 +75,10 @@ margin: 5vh;
 color:#000000;
 background-color:#FFFFFF;
 }
-@media all and (max-width:30em){
+/* @media all and (max-width:30em){
 .btn{
 display:block;
 padding: 10vh;
-}
-}
+} */
+/* } */
 </style>

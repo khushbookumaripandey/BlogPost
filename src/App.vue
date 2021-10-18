@@ -3,8 +3,9 @@
     <div id="nav">
     -- <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> -->
-    <!-- </div>  --><div>
-       <Navbar/>
+    <!-- </div>  -->
+    <div>
+       <!-- <Navbar/> -->
     <router-view/>
     </div>
   <!-- </div> -->
@@ -30,5 +31,10 @@ export default {
 }
 body{
   margin:0;
+  background-color: rgb(230, 250, 255);
+
+}
+* {
+  box-sizing: border-box;
 }
 </style>

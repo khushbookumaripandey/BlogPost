@@ -5,6 +5,12 @@ import Navbar from '../components/Navbar.vue'
 import CreatePost from '../views/CreatePost.vue'
 import Post from '../views/Post.vue'
 import EditPost from '../views/EditPost'
+import MobileCreatePost from '../mobileview/MobileCreatePost.vue'
+import MobileEditPost from '../mobileview/MobileEditPost.vue'
+import MobilePost from '../mobileview/MobilePost.vue'
+import MobileHomepage from '../mobileview/MobileHomepage.vue'
+import AllUser from '../views/AllUser.vue'
+import MobileAllUser from '../mobileview/MobileAllUser.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -32,6 +38,36 @@ const routes = [
     path: '/editpost',
     name: 'EditPost',
     component: EditPost
+  },
+  {
+    path: '/allUser',
+    name: 'AllUser',
+    component: AllUser
+  },
+  {
+    path: '/mobileHome',
+    name: 'MobileHomepage',
+    component: MobileHomepage
+  },
+  {
+    path: '/mobileCreatePost',
+    name: 'MobileCreatePost',
+    component: MobileCreatePost
+  },
+  {
+    path: '/mobilePost',
+    name: 'MobilePost',
+    component: MobilePost
+  },
+  {
+    path: '/mobileEditPost',
+    name: 'MobileEditPost',
+    component: MobileEditPost
+  },
+  {
+    path: '/mobileAllUser',
+    name: 'MobileAllUser',
+    component: MobileAllUser
   }
 ]
 
