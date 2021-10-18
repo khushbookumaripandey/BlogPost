@@ -2,15 +2,14 @@
 <div class="outermost">
     <div class="card">
     <div class="column1">
-        <img :src="getPostData.previewImage" alt="img" class="Image" v-if="getPostData.previewImage">
-         <img :src="getPostData.imgUrl" alt="img" class="Image" v-else>
+        <img :src="getData.imgUrl" alt="img" class="Image">
     </div>
     <div class="column2">
         <div>
-        <h4  class="title">{{getPostData.title}}</h4>
+        <div class="title">{{getData.title}}</div>
         </div>
         <div>
-        <h3 name="desc" class="descprition" v-html="getPostData.description.replace(/\n/gm,'<br>')"></h3>
+        <div name="desc" class="descprition" v-html="getData.description.replace(/\n/gm,'<br>')"></div>
     </div>
     <div class="btn">
        <button class="publish" @click="callEdit()">Edit</button>
@@ -31,40 +30,33 @@ export default {
   },
 
   computed: {
-    // ...mapGetters(['getData']),
-    ...mapGetters(['getPostData'])
-
+    ...mapGetters(['getData'])
   },
   methods: {
-    // ...mapActions(['getBlogData']),
-    ...mapActions(['viewPost']),
+    ...mapActions(['getBlogData']),
     ...mapActions(['deleteBlogData']),
     callDelete () {
       this.deleteBlogData()
-      // this.$alert('Blog success to delete')
-      this.$confirm('Do you want to delete this blog?')
-        .then(res => {
-          this.$router.push('/createpost')
-        })
+      this.$alert('Blog success to delete')
+      this.$router.push('/mobileCreatePost')
     },
     callCanceled () {
-      this.$router.push('/allUser')
+      this.$router.push('/mobileHome')
     },
     callEdit () {
-      this.$router.push('/editpost')
+      this.$router.push('/mobileEditPost')
     }
   },
   beforeMount () {
-    this.viewPost()
-    // this.getBlogData()
+    this.getBlogData()
   }
 }
 </script>
-
 <style scoped>
+@media screen and (max-width: 400px){
 .outermost{
   position: fixed;
-  height: 100%;
+  height: 850px;
   width: 100%;
   background-color: rgb(230, 250, 255);
 }
@@ -96,66 +88,72 @@ export default {
 background-color: white;
 width: 50%;
 min-width: 275px;
+/* border:1px solid black; */
 }
 .column2{
 background-color: white;
 width: 50%;
-padding-left: 1vw;
+min-width: 275px;
+/* border: 1px solid black; */
+/* padding-left: 1vw; */
 }
 .Image{
+margin-top: 3em;
 height: 100%;
 width: 100%
 }
 .title{
-  width:39.75vw;
-  height: 8vh;
-  border:none;
+  width:100%;
+  height: 3em;
+  /* border:1px solid black; */
   outline: none;
-  font-size: 3vh;
+  font-size: 1.5em;
   font-weight: bold;
   font-family: serif;
-  margin-top: 3vh;
-  margin-bottom: 3vh;
+  /* margin-top: 1em; */
+  /* margin-bottom: 0em; */
   padding: 1vh;
   text-align: center;
   color:blue;
 }
 .descprition{
-    width:39.75vw;
-    height: 55vh;
-  border: none;
+  width:100%;
+  height: auto;
+  /* border: 1px solid black; */
   outline: none;
-  font-size: 1vw;
+  font-size: 1em;
   font-style: initial;
   font-weight: initial;
-  font-family:Arial, Helvetica, sans-serif;
-
+  font-family:Arial;
+  text-align: center;
+  /* margin-left: 2em; */
 }
 .btn{
-    display: flex;
+  display: flex;
   justify-content: space-evenly;
 }
 .publish{
 cursor: pointer;
 border: 2px solid #aaa;
 background-color: transparent;
-height: 6vh;
-width: 10vw;
+height: 3rem;
+width: 5rem;
 color:#aaa;
-font-size: 1.5vw;
+font-size: 1em;
 box-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);
-margin-top: 2vh;
+margin-top: 1em;
 }
 .cancel{
   cursor: pointer;
 border: 2px solid #aaa;
 background-color: transparent;
-height: 6vh;
-width: 10vw;
+height: 3rem;
+width: 5rem;
 color:#aaa;
-font-size: 1.5vw;
+font-size: 1em;
 box-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);
-margin-top: 2vh;
+margin-top: 1em;
+margin-bottom: 1em;
 }
-
+}
 </style>

@@ -1,30 +1,26 @@
 <template>
-<main>
+<!-- edit start -->
 <div class="container1">
 <div class="inner">
+  <div class="column1"></div>
   <div class="column2">
-    <div class="title1">
+    <div>
     <input type="text" class="title" v-model="dataId.title" placeholder="Give a Title">
     </div>
     <div>
     <textarea name="desc" class="descprition"  v-model="dataId.description" placeholder="Write Description for blog"></textarea>
+
     </div>
-    <div class="img">
-      <img :src="dataId.previewImage" class="uploading-image" v-if="dataId.previewImage"/>
-            <!-- <img :src="dataId.imgUrl" class="uploading-image" v-else/> -->
-    </div>
-    <div>
-      <input type="file" accept="image/jpeg" @change=uploadImage>
-   </div>
-    <!-- <input type="text" class="imageUpload" v-model="dataId.imgUrl" placeholder="Put Image Url"> -->
+    <input type="text" class="imageUpload" v-model="dataId.imgUrl" placeholder="Put Image Url">
     <div class="btn1">
     <button class="cancel" @click="callSave()">Save</button>
     <button class="cancel" @click="callcancel()">cancel</button>
     </div>
   </div>
+  <div class="column3">
+  </div>
 </div>
   </div>
-</main>
 </template>
 <script>
 import axios from 'axios'
@@ -35,7 +31,7 @@ export default {
       dataId: {
         title: '',
         description: '',
-        previewImage: ''
+        imgUrl: ''
       }
     }
   },
@@ -45,27 +41,16 @@ export default {
   methods: {
     ...mapActions(['postblog']),
     callcancel () {
-      this.$router.push('/post')
+      this.$router.push('/mobilePost')
     },
     callSave () {
       axios.put('http://localhost:3000/blogdata/' + localStorage.getItem('Id'), this.dataId)
         .then(res => {
           console.log('put function', res.data)
-          this.$router.push('/post')
-          this.$alert('Successfully Updated Blog')
+          this.$router.push('/mobilePost')
+          this.$alert('Blog success to update')
         })
-        .catch(this.$alert('Failed to update Blog'))
-    },
-    uploadImage (e) {
-      const image = e.target.files[0]
-      localStorage.setItem('image', image)
-      const reader = new FileReader()
-      reader.readAsDataURL(image)
-      reader.onload = e => {
-        // this.previewImage = e.target.result
-        this.dataId.previewImage = e.target.result
-        console.log(this.previewImage)
-      }
+        .catch(this.$alert('Blog failed to update'))
     }
   },
   mounted () {
@@ -82,33 +67,34 @@ export default {
 </script>
 
 <style scoped>
+@media screen and (max-width: 400px){
 .inner{
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   height: 100%;
 }
-/* .column1{
+.column1{
 float: left;
-width:25%;
+width:15%;
 background-color: rgb(230, 250, 255);
-} */
-.column2{
-width:50%;
-justify-content: center;
-background-color: white;
 
 }
-/* .column3{
+.column2{
 float: left;
-width:25%;
-background-color: rgb(230, 250, 255);
-} */
+width:70%;
+justify-content: center;
+}
+.column3{
+ float: left;
+ width:15%;
+ background-color: rgb(230, 250, 255);
+}
 .title{
-  width:45vw;
+  width:15rem;
   height: 5vh;
   border:none;
   outline: none;
-  font-size: 3.5vh;
+  font-size: 1.5em;
   font-weight: bold;
   font-family: serif;
   margin-top: 5vh;
@@ -117,11 +103,11 @@ background-color: rgb(230, 250, 255);
   margin-right: 2vw;
   padding: 1vh;
   text-align: center;
-  color:blue
+  color: blue;
 }
 .descprition{
-  width:45.80vw;
-  height: 25vh;
+  width:15rem;
+  height: 50vh;
   border: none;
   outline: none;
   font-size: 2.5vh;
@@ -130,13 +116,12 @@ background-color: rgb(230, 250, 255);
   margin-left: 2vw;
   margin-right: 2vw;
   font-family:Arial, Helvetica, sans-serif;
-
 }
 .imageUpload{
 text-align: center;
 border: none;
 outline: none;
-width:45vw;
+width:15rem;
 height: 5vh;
 margin-top: 7vh;
 padding: 1vh;
@@ -148,62 +133,36 @@ font-style: initial;
 font-weight: initial;
 
 }
-.img{
-  /* height: auto; */
-  margin: auto;
-  width: 100%;
-  height:330px;
-  /* display: flex;
-  justify-content: center; */
-
-}
 .btn1{
-  margin: auto;
   display: flex;
   justify-content: space-evenly;
 }
 .container1{
   position: fixed;
+  height: 500px;
   width: 100%;
 }
 .publish{
   cursor: pointer;
 border: 2px solid #aaa;
 background-color: transparent;
-height: 6vh;
-width: 10vw;
+height: 3rem;
+width: 5rem;
 color:#aaa;
-font-size: 1.5vw;
+font-size: 1em;
 box-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);
-margin-top: 4vh;
-margin-bottom: 3vh;
+margin-top: 8vh;
 }
 .cancel{
   cursor: pointer;
 border: 2px solid #aaa;
 background-color: transparent;
-height: 6vh;
-width: 10vw;
+height: 3rem;
+width: 5rem;
 color:#aaa;
-font-size: 1.5vw;
+font-size: 1em;
 box-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);
-margin-top: 4vh;
-margin-bottom: 3vh;
+margin-top: 8vh;
 }
-.uploading-image{
-     display:flex;
-     width: 100%;
-     height: 100%;
-   }
-input[type=file]::file-selector-button{
-cursor: pointer;
-border: 2px solid #aaa;
-background-color: transparent;
-height: 6vh;
-width: 10vw;
-color:#aaa;
-font-size: 1.5vw;
-box-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);
-margin-top: 1vh;
-   }
+}
 </style>

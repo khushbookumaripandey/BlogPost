@@ -1,24 +1,33 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import VueSimpleAlert from 'vue-simple-alert'
+Vue.use(VueSimpleAlert)
 Vue.use(Vuex)
-
 const postData = 'http://localhost:3000/blogdata'
-const fetchData = 'http://localhost:3000/blogdata/'
+const fetchData = 'http://localhost:3000/blogdata'
 const deleteData = 'http://localhost:3000/blogdata/'
 const updateData = (pid) => 'http://localhost:3000/blogdata/'
+const viewPostData = 'http://localhost:3000/blogdata/'
 export default new Vuex.Store({
   state: {
-    value: []
+    value: [],
+    specificValue: []
   },
   getters: {
     getData (state) {
       return state.value
+    },
+    getPostData (state) {
+      return state.specificValue
     }
   },
   mutations: {
     setData (state, item) {
       state.value = item
+    },
+    setPostData (state, item) {
+      state.specificValue = item
     }
   },
   actions: {
@@ -26,7 +35,8 @@ export default new Vuex.Store({
       const details = {
         title: data.title,
         description: data.description,
-        imgUrl: data.imgUrl
+        imgUrl: data.imgUrl,
+        previewImage: data.previewImage
       }
       axios.post(postData, details)
         .then(res => {
@@ -36,7 +46,7 @@ export default new Vuex.Store({
         })
     },
     getBlogData ({ commit }, data) {
-      axios.get(fetchData + localStorage.getItem('Id'))
+      axios.get(fetchData)
         .then(
           res => {
             console.log(res.data)
@@ -45,6 +55,18 @@ export default new Vuex.Store({
             commit('setData', test)
           })
         .catch(e => console.log('error', e))
+    },
+    viewPost ({ commit }, data) {
+      axios.get(viewPostData + localStorage.getItem('Id'))
+        .then(
+          res => {
+            console.log(res.data)
+            const test = res.data
+            console.log('this is getPostData')
+            commit('setPostData', test)
+          })
+      console.log('this is deleteData')
+      console.log('this is deleteData after then')
     },
     deleteBlogData () {
       axios.delete(deleteData + localStorage.getItem('Id'))
